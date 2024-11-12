@@ -16,19 +16,13 @@ import { useNavigation } from "@react-navigation/native";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import * as ImagePicker from "expo-image-picker";
 import PhoneInput from "react-native-phone-number-input";
-import AvatarItem from "../../components/AvatarItem/AvatarItem";
 import {
   profileImageSelector,
   userInfoSelector,
 } from "../../store/selectors/profileSelector";
 import { MainNavigationType } from "../../navigation/MainNavigtion";
 import { IUserEditedInfo } from "../../interfaces/types";
-import {
-  deleteUserPicture,
-  editUserInfo,
-  editUserPicture,
-  getUserInfo,
-} from "../../store/slices/profileSlice";
+
 import { LOGIN } from "../../enums/enums";
 import { validator } from "../../utils/variables";
 import Icons from "../../assets/svgs";
@@ -129,22 +123,13 @@ const EditScreen = () => {
 
   const onSubmit: SubmitHandler<IUserEdit> = useCallback(
     (data) => {
-      const payload: IUserEditedInfo = {
-        email: data.email,
-        phoneNumber: data.phoneNumber,
-        countryIso: countryIso ?? "am",
-      };
-      dispatch(
-        editUserInfo({ id: user?.id, info: payload }, (email) =>
-          dispatch(getUserInfo(email))
-        )
-      );
+   
+      
       if (image === "noImage") {
         dispatch(deleteUserPicture({ id: user?.id }));
       } else {
         dispatch(
           editUserPicture({ id: user?.id, imageUri: imageUri }, () => {
-            dispatch(getUserInfo(user?.email ?? ""));
           })
         );
       }
@@ -172,14 +157,7 @@ const EditScreen = () => {
             }}
           />
           <View style={styles.imageBox}>
-            <AvatarItem
-              isVisible
-              deleteImage={handleDelete}
-              image={image ? image : imageUpdated || user?.profilePic}
-              pickImage={() => setCameraModal(true)}
-              isDisabled
-              style={styles.image}
-            />
+          
           </View>
           <View style={styles.inputBox}>
             <Controller

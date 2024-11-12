@@ -41,13 +41,9 @@ import {
 } from "../../../interfaces/types";
 import ActiveContentItem from "../../../components/Content/ActiveContentItem/ActiveContentItem";
 import { pixel } from "../../../utils/pixel";
-import { setError } from "../../../store/slices/administrativSlice";
 import AvatarItem from "../../../components/AvatarItem/AvatarItem";
 import Icons from "../../../assets/svgs";
-import {
-  deleteCardPicture,
-  editCardPicture,
-} from "../../../store/slices/profileSlice";
+
 import FilterTabBar from "../../../components/FilterTabBar/FilterTabBar";
 import { tabsData } from "../../../assets/mocks/mocks";
 import styles from "../AddCardScreen/AddCardScreen.style";
@@ -92,13 +88,7 @@ const EditCardScreen = () => {
   useEffect(() => {
     dispatch(getContentList());
   }, []);
-  const handleTabPress = (tabId: string) => {
-    setSelectedTabId(tabId);
-    const filteredContent = contentSelector?.filter(
-      (item) => item.contentType === tabId
-    );
-    setContents(filteredContent);
-  };
+ 
 
   const handleDelete = useCallback(() => {
     setImage("noImage");

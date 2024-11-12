@@ -40,12 +40,12 @@ const CardItem: React.FC<Props> = (props) => {
         }
       />
       <View style={styles.info}>
-        <AvatarItem
+        {/* <AvatarItem
           avatarStyle={{ marginTop: -30 }}
           style={styles.image}
           image={data?.profilePic || ""}
           isDisabled={true}
-        />
+        /> */}
         <Text style={styles.title}>
           {data?.name} {data?.surname}
         </Text>

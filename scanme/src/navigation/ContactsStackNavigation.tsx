@@ -5,7 +5,6 @@ import {
 } from "@react-navigation/stack";
 import { CONTACT } from "../enums/enums";
 import ContactListScreen from "../screens/ContactsScreens/ContactListScreen/ContactsListScreen";
-
 export type ContactNavigationParamList = {
   CONTACTS: undefined;
 };

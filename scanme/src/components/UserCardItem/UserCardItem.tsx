@@ -10,7 +10,6 @@ import {
 import { ICardItem } from "../../interfaces/types";
 import Icons from "../../assets/svgs/index";
 import { pixel } from "../../utils/pixel";
-import AvatarItem from "../AvatarItem/AvatarItem";
 import PrimaryButton, { ButtonTypes } from "../primaryButton/PrimaryButton";
 import { BLACK } from "../../assets/colors/colors";
 import { styles } from "./UserCardItem.styles";
@@ -79,11 +78,7 @@ const UserCardItem: React.FC<Props> = (p: Props) => {
         }
       />
       <View style={styles.info}>
-        <AvatarItem
-          style={styles.image}
-          isDisabled={true}
-          image={p.data?.profilePic || ""}
-        />
+      
         <Text style={styles.title}>
           {p.data?.name} {p.data?.surname}
         </Text>

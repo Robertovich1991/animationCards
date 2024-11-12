@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Image, TouchableOpacity, View } from "react-native";
+import { Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -17,7 +17,6 @@ import { cardListSelector } from "../../store/selectors/cardSelector";
 import { getCardList } from "../../store/slices/cardSlice";
 import CardPreviewItem from "../../components/CardPreviewItem/CardPreviewItem";
 import styles from "./BottomTabNavigation.styles";
-import CameraScanNavigationStack from "../CameraScanStackNavigation";
 
 export type RootTabParamList = {
   ProfileScreen: undefined;
@@ -32,7 +31,6 @@ const ICON_SIZE = 30;
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 const TabNavigation: React.FC = ({ navigation }: any) => {
-  const user = useSelector(userInfoSelector);
   const [cardModalVisible, setCardModalVisible] = useState<boolean>(false);
   const handlePreviewPress = useCallback(() => {
     setCardModalVisible(true);
@@ -41,8 +39,8 @@ const TabNavigation: React.FC = ({ navigation }: any) => {
   const dispatch = useDispatch<Dispatch<any>>();
 
   useEffect(() => {
-    dispatch(getCardList(user?.id));
-  }, [user]);
+    dispatch(getCardList());
+  }, []);
 
   return (
     <>
@@ -78,9 +76,7 @@ const TabNavigation: React.FC = ({ navigation }: any) => {
                       borderRadius: pixel(20),
                     }}
                     source={{
-                      uri: user?.profilePic
-                        ? `https://scanme.am/api/admin/content/getImage?image=${user?.profilePic}`
-                        : "https://i.pinimg.com/564x/2f/15/f2/2f15f2e8c688b3120d3d26467b06330c.jpg",
+                      uri: "https://i.pinimg.com/564x/2f/15/f2/2f15f2e8c688b3120d3d26467b06330c.jpg",
                     }}
                   />
                 }
@@ -109,63 +105,6 @@ const TabNavigation: React.FC = ({ navigation }: any) => {
             ),
           }}
         />
-        <Tab.Screen
-          listeners={({ navigation, route }) => ({
-            tabPress: (e) => {
-              e.preventDefault();
-              navigation.navigate("SCAN_CAMERA");
-            },
-          })}
-          name={TAB.SCANNERSTACK}
-          component={CameraScanNavigationStack}
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <View
-                style={{
-                  paddingBottom: pixel(70),
-                }}
-              >
-                <TabBarItem
-                  focused={focused}
-                  type={ItemType.DARK}
-                  icon={
-                    <View style={styles.share}>
-                      <Icons.QRWhite width={ICON_SIZE} height={ICON_SIZE} />
-                    </View>
-                  }
-                  title="Scan"
-                />
-              </View>
-            ),
-          }}
-        />
-        <Tab.Screen
-          name={TAB.SHARE}
-          component={CardNavigationStack}
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <TabBarItem
-                focused={focused}
-                type={ItemType.DARK}
-                icon={
-                  <TouchableOpacity
-                    onPress={() => {
-                      handlePreviewPress();
-                    }}
-                  >
-                    <Icons.Share
-                      width={ICON_SIZE}
-                      height={ICON_SIZE}
-                      stroke={focused ? BLACK : GREY}
-                    />
-                  </TouchableOpacity>
-                }
-                title="Share"
-              />
-            ),
-          }}
-        />
-
         <Tab.Screen
           name={TAB.PROFILE}
           component={ProfileScreen}

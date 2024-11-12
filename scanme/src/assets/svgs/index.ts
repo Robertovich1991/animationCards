@@ -1,5 +1,4 @@
 import Checked from './checked.svg';
-import Avatar from './avatar.svg'
 import EyeClosed from './eyeClose.svg'
 import EyeOpen from './eyeOpen.svg'
 import ArrowUp from './arrowUp.svg'
@@ -58,7 +57,6 @@ export default {
   WhatsUp,
   Viber,
   Checked,
-  Avatar,
   EyeClosed,
   EyeOpen,
   ArrowUp,

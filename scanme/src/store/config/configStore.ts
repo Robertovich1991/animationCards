@@ -1,14 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from "../slices/authSlice"
-import administrativeReducer from "../slices/administrativSlice"
-import profileReducer from "../slices/profileSlice"
 import cardreducer from "../slices/cardSlice"
 
 export const store = configureStore({
     reducer: {
-        authReducer,
-        administrativeReducer,
-        profileReducer,
         cardreducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
