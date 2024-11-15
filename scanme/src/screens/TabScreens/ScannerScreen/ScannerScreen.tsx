@@ -44,13 +44,13 @@ const ScannerScreen = () => {
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
         const index = Math.floor(Math.floor(-translateY.value));
-        if (index < 0) {
-          translateY.value = withSpring(0);
-        } else if (Math.abs(index) > 20) {
-          translateY.value = withSpring(19);
-        } else {
+        // if (index < 0) {
+        //   translateY.value = withSpring(0);
+        // } else if (Math.abs(index) > 20) {
+        //   translateY.value = withSpring(19);
+        // } else {
           translateY.value = withSpring(-index);
-        }
+       // }
         // The user has released all touches while this view is the
         // responder. This typically means a gesture has succeeded
       },
@@ -67,8 +67,13 @@ const ScannerScreen = () => {
   ).current;
   return (
     <SafeAreaView {...panResponder.panHandlers} style={styles.container}>
-      {cardList?.map((i) => (
+      {cardList?.map((el, i) => (
         <Card
+        len={cardList.length}
+          profession={el.profession}
+          name={el.name}
+          date={el.date}
+          url={el.url}
           translateY={translateY}
           index={i}
           onOpened={(isOpen: boolean) => {

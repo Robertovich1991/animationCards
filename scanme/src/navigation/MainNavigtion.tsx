@@ -58,11 +58,11 @@ export function MainNavigation() {
           component={UserProfileScreen}
           options={verticalAnimation}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={MAIN.SCAN_CAMERA}
           component={CameraScan}
           options={verticalAnimation}
-        />
+        /> */}
       </Stack.Group>
     </Stack.Navigator>
   );
