@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { pixel } from '../../utils/pixel';
-import { BLACK, WHITE } from '../../assets/colors/colors';
+import { BLACK } from '../../assets/colors/colors';
 import { textGlobalStyle } from '../../utils/text-globalStyles';
 
 export const styles = StyleSheet.create({
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     surname: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 5
+        gap: pixel(5)
     }
 
 });

@@ -1,16 +1,11 @@
-import { useState } from "react";
 import {
   Image,
   View,
   Text,
-  TouchableOpacity,
-  ViewStyle,
   ImageStyle,
 } from "react-native";
 import Icons from "../../assets/svgs";
 import { styles } from "./AvatarItem.styles";
-import { NumberProp } from "react-native-svg";
-import { pixel } from "../../utils/pixel";
 
 interface Props {
   uri: string;

@@ -1,5 +1,4 @@
 import { View, Text } from "react-native";
-import { ICardItem } from "../../interfaces/types";
 import { styles } from "./CardItem.style";
 import { ReactNode } from "react";
 

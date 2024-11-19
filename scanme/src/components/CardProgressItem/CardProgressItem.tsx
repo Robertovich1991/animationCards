@@ -1,5 +1,4 @@
 import { View, Text } from "react-native";
-import { ICardItem } from "../../interfaces/types";
 import { ReactNode } from "react";
 import * as Progress from "react-native-progress";
 import Icons from "../../assets/svgs";

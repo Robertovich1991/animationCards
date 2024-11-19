@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { pixel } from '../../utils/pixel';
-import { BLACK, GREY, RED, SCANNER, WHITE } from '../../assets/colors/colors';
+import { BLACK, GREY, RED } from '../../assets/colors/colors';
 
 const styles = StyleSheet.create({
   container: {
