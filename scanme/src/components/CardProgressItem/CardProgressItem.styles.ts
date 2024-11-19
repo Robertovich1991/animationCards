@@ -16,7 +16,6 @@ export const styles = StyleSheet.create({
     padding: pixel(6),
     backgroundColor: 'rgba(150,255,155,0.2)',
     borderRadius:100
-
   },
   title: {
     ...textGlobalStyle({ size: pixel(14), weight: 'medium' }),

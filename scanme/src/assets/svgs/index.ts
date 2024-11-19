@@ -1,3 +1,7 @@
+import SocialIcon from './socialIcon.svg'
+
+
+
 import Checked from './checked.svg';
 import EyeClosed from './eyeClose.svg'
 import EyeOpen from './eyeOpen.svg'
@@ -14,8 +18,6 @@ import Edit from './edit.svg'
 import Email from './email.svg'
 import Phone from './phone.svg'
 import ProfileCard from './profileCard.svg'
-import Viber from './viber.svg'
-import WhatsUp from './whatsapp.svg'
 import Logout from './logout.svg'
 import Delete from './delete.svg'
 import Logo from './logo.svg'
@@ -24,18 +26,14 @@ import Camera from './camera.svg'
 import QR from './qr.svg'
 import QRWhite from './qrWhite.svg'
 import Search from './search.svg'
-import Succesful from './succesful.svg'
 import Menu from './menu.svg'
 import Shopping from './shopping.svg'
 import GooglePlay from './googlePlay.svg'
 import AppStore from './appStore.svg'
 import Alarm from './alarm.svg'
 import Paper from './paper.svg'
-import Wallet from './wallet.svg'
-import ArrwoCard from './arrowCard.svg'
 import LinkCard from './linkCard.svg'
 import ScanCard from './scanCard.svg'
-import SignCard from './signCard.svg'
 import CheckBlue from './checkBlue.svg'
 import Plus from './plus.svg'
 import Media from './media.svg'
@@ -43,19 +41,30 @@ import Contacts from './contacts.svg'
 import Settings from './settings.svg'
 import Share from './share.svg'
 import ContactsBlack from './contactsBlack.svg'
-import Downdload from './download.svg'
 import ShareQR from './shareQR.svg'
 import Copy from './copy.svg'
 import Gallery from './gallery.svg'
-import ThreeDots from './threeDots.svg'
 import GalleryPick from './galleryPick.svg'
 import CameraPick from './cameraPick.svg'
 import Frame from './frame.svg'
 import Close from './close.svg'
+import Shield from './shield.svg'
+import Chart from './chart.svg'
+import TabDots from './tabDots.svg'
+import TabSearch from './tabSearch.svg'
+import TabGift from './tabGift.svg'
+import TabProfile from './tabProfile.svg'
+
 
 export default {
-  WhatsUp,
-  Viber,
+  SocialIcon,
+  Shield,
+  Chart,
+  TabDots,
+  TabSearch,
+  TabGift,
+  TabProfile,
+
   Checked,
   EyeClosed,
   EyeOpen,
@@ -80,18 +89,14 @@ export default {
   QR,
   QRWhite,
   Search,
-  Succesful,
   Menu,
   Shopping,
   GooglePlay,
   AppStore,
   Alarm,
   Paper,
-  Wallet,
-  ArrwoCard,
   LinkCard,
   ScanCard,
-  SignCard,
   CheckBlue,
   Plus,
   Media,
@@ -99,11 +104,9 @@ export default {
   Settings,
   Share,
   ContactsBlack,
-  Downdload,
   ShareQR,
   Copy,
   Gallery,
-  ThreeDots,
   GalleryPick,
   CameraPick,
   Frame,

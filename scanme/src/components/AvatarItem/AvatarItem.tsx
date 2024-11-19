@@ -13,47 +13,25 @@ import { NumberProp } from "react-native-svg";
 import { pixel } from "../../utils/pixel";
 
 interface Props {
+  uri: string;
+  name: string;
+  surname: string;
   style: ImageStyle;
-  containerStyle?: ViewStyle;
-  avatarStyle?: ViewStyle;
-  isDisabled?: boolean;
-  isVisible?: boolean;
-  image: any;
-  pickImage?: (text?: string) => void;
-  deleteImage?: () => void;
 }
 
 const AvatarItem: React.FC<Props> = (p: Props) => {
   return (
-    <View style={p.containerStyle}>
-      <TouchableOpacity disabled={p.isDisabled} onPress={p.pickImage}>
-        {p.image && p.image !== "noImage" ? (
-          <Image
-            source={{
-              uri: p.image.startsWith("file://")
-                ? p.image
-                : `https://scanme.am/api/admin/content/getImage?image=${p.image}`,
-            }}
-            style={[styles.container, p.style]}
-          />
-        ) : (
-          <Icons.Avatar
-            style={p.avatarStyle}
-            width={p.style.width as NumberProp}
-            height={p.style.width as NumberProp}
-          />
-        )}
-        {p.isVisible && (
-          <>
-            <TouchableOpacity onPress={p.deleteImage} style={styles.delete}>
-              <Text>X</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={p.pickImage} style={styles.camera}>
-              <Icons.CameraPick width={pixel(30)} height={pixel(30)} />
-            </TouchableOpacity>
-          </>
-        )}
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <Image
+        source={{
+          uri: p.uri,
+        }}
+        style={[styles.image, p.style]}
+      />
+      <View>
+        <Text style={styles.nameText}>{p.name}</Text>
+        <Text>{p.surname}</Text>
+      </View>
     </View>
   );
 };

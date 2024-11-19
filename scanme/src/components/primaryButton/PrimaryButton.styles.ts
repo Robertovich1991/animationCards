@@ -9,21 +9,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     gap: pixel(10),
-    paddingVertical: pixel(8),
+    paddingVertical: pixel(10),
     paddingHorizontal: pixel(16),
     shadowColor: 'grey',
     alignItems: 'center',
-    borderRadius: pixel(30)
-  },
-  box: {
-    borderRadius: pixel(10),
-    overflow: 'hidden',
+   borderRadius: pixel(48)
   },
   darkTitle: {
     color: WHITE,
   },
   title: {
-    ...textGlobalStyle({ size: pixel(16), weight: 'bold' }),
+    ...textGlobalStyle({ size: pixel(14), weight: 'regular' }),
     textAlign: 'center',
     color: BLACK
   },
@@ -31,28 +27,13 @@ const styles = StyleSheet.create({
     backgroundColor: BLACK,
     borderWidth: pixel(1),
     borderColor: BLACK,
-    paddingVertical: pixel(6),
-    borderRadius: pixel(30),
-    height: pixel(54)
-  },
-  red: {
-    backgroundColor: RED_CRIMSON,
-    borderWidth: pixel(2),
-    borderColor: RED_CRIMSON,
-    paddingVertical: pixel(6),
-    borderRadius: pixel(30)
-  },
-  green: {
-    backgroundColor: GREEN,
-    borderColor: GREEN,
-    borderRadius: pixel(30)
+    borderRadius: pixel(48),
   },
   whiteButton: {
     backgroundColor: WHITE,
-    borderRadius: pixel(30),
-    borderColor: BLACK,
+    borderRadius: pixel(48),
+    borderColor: "rgba(0, 0, 0, 0.1)",
     borderWidth: pixel(1),
-    height: pixel(54)
   },
 });
 

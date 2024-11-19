@@ -1,99 +1,91 @@
-import React, { useRef } from "react";
-import { PanResponder, SafeAreaView, StyleSheet } from "react-native";
+import React, { useCallback, useRef } from "react";
+import { PanResponder, SafeAreaView, StyleSheet, View } from "react-native";
 import { useSharedValue, withSpring } from "react-native-reanimated";
-import Card from "../../../components/card";
-import { useSelector } from "react-redux";
+import Card from "../../../components/Card/card";
+import { useDispatch, useSelector } from "react-redux";
 import { cardListSelector } from "../../../store/selectors/cardSelector";
+import { removeItem } from "../../../store/slices/cardSlice";
+
+import PrimaryButton, {
+  ButtonTypes,
+} from "../../../components/primaryButton/PrimaryButton";
+import styles from "./ScannerScreen.style";
 
 const ScannerScreen = () => {
   const opened = useRef(-1);
   const translateY = useSharedValue(0);
   const cardList = useSelector(cardListSelector);
+  const dispatch = useDispatch();
   const panResponder = useRef(
     PanResponder.create({
       // Ask to be the responder:
       onMoveShouldSetPanResponder: (_, gestureState) => {
+        //console.log(gestureState.dx,gestureState.dy);
         return (
-          opened.current === -1 && gestureState.dx != 0 && gestureState.dy != 0
-        ); // handle the gesture whether is click or drag event
-      },
-      onMoveShouldSetPanResponderCapture: (_, gestureState) => {
-        console.log("onMoveShouldSetPanResponderCapture", opened);
-
-        return (
-          opened.current === -1 && gestureState.dx != 0 && gestureState.dy != 0
+          opened.current === -1 &&
+          Math.abs(gestureState.dy) > Math.abs(gestureState.dx)
         );
-      },
-      onStartShouldSetPanResponder: (evt, gestureState) =>
-        opened.current === -1 && gestureState.dx != 0 && gestureState.dy != 0,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) =>
-        opened.current === -1 && gestureState.dx != 0 && gestureState.dy != 0,
-
-      onPanResponderGrant: (evt, gestureState) => {
-        // The gesture has started. Show visual feedback so the user knows
-        // what is happening!
-        // gestureState.d{x,y} will be set to zero now
       },
       onPanResponderMove: (evt, gestureState) => {
         const { moveY, dy, vy, y0 } = gestureState;
         translateY.value -= vy * 0.2;
-        // The most recent move distance is gestureState.move{X,Y}
-        // The accumulated gesture distance since becoming responder is
-        // gestureState.d{x,y}
       },
-      onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
         const index = Math.floor(Math.floor(-translateY.value));
-        // if (index < 0) {
-        //   translateY.value = withSpring(0);
-        // } else if (Math.abs(index) > 20) {
-        //   translateY.value = withSpring(19);
-        // } else {
-          translateY.value = withSpring(-index);
-       // }
-        // The user has released all touches while this view is the
-        // responder. This typically means a gesture has succeeded
-      },
-      onPanResponderTerminate: (evt, gestureState) => {
-        // Another component has become the responder, so this gesture
-        // should be cancelled
-      },
-      onShouldBlockNativeResponder: (evt, gestureState) => {
-        // Returns whether this component should block native components from becoming the JS
-        // responder. Returns true by default. Is currently only supported on android.
-        return true;
+        translateY.value = withSpring(-index);
       },
     })
   ).current;
+  console.log(cardList?.length);
+  const removeFromList = useCallback(
+    (id: number, index: number) => {
+      if (cardList?.length) {
+        const count =
+          Math.floor(Math.abs(translateY.value / cardList.length)) *
+          (translateY.value > 0 ? 1 : -1);
+        console.log(
+          Math.floor(Math.abs(translateY.value / cardList.length)),
+          translateY.value > 0 ? 1 : -1
+        );
+
+        index = count * (cardList.length - 1) - index;
+        console.log("New Index", index, translateY.value);
+
+        translateY.value = withSpring(translateY.value - 1, { duration: 500 });
+        dispatch(removeItem(id));
+      }
+    },
+    [cardList]
+  );
   return (
     <SafeAreaView {...panResponder.panHandlers} style={styles.container}>
+      <View style={styles.header}>
+        <PrimaryButton title="Create" type={ButtonTypes.DARK} />
+        <PrimaryButton title="$100.00 | Edit" type={ButtonTypes.WHITE} />
+      </View>
       {cardList?.map((el, i) => (
         <Card
+        containerStyle={{
+          // transform: [
+          //   { rotate: i === 0 ? "0deg" : i % 2 === 0 ? "3deg" : "-3deg" }
+          // ]
+        }}
+        id={el.id}
+        onRemove={removeFromList}
         len={cardList.length}
-          profession={el.profession}
-          name={el.name}
-          date={el.date}
-          url={el.url}
-          translateY={translateY}
-          index={i}
-          onOpened={(isOpen: boolean) => {
-            opened.current = isOpen ? i : -1;
-          }}
-        />
+        profession={el.profession}
+        name={el.name}
+        date={el.date}
+        url={el.url}
+        translateY={translateY}
+        index={i}
+        onOpened={(isOpen: boolean) => {
+          opened.current = isOpen ? i : -1;
+        }}
+      />
       ))}
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ecf0f1",
-    padding: 8,
-    position: "relative",
-  },
-});
 
 export default ScannerScreen;

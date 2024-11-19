@@ -5,9 +5,13 @@ import { BLACK, WHITE } from '../../assets/colors/colors';
 const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: WHITE,
-    height: pixel(90),
-    paddingTop: pixel(15),
+    height: pixel(80),
+    borderTopColor: 'white',
+    borderTopWidth: 0,
+    elevation: 0,
+    shadowOpacity: 0,
     alignItems: 'center',
+    paddingHorizontal: pixel(34)
   },
   tabBarLight: {
     backgroundColor: WHITE,

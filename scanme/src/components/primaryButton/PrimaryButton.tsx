@@ -5,8 +5,6 @@ import { TouchableNativeFeedback, View, Text, ViewStyle } from "react-native";
 export enum ButtonTypes {
   WHITE = "WHITE",
   DARK = "DARK",
-  RED = "RED",
-  GREEN = "GREEN",
 }
 
 type Props = {
@@ -27,21 +25,12 @@ const BUTTON_STYLES: any = {
     button: styles.dark,
     title: [styles.darkTitle],
   },
-  [ButtonTypes.RED]: {
-    button: [styles.red],
-    title: [styles.title],
-  },
-  [ButtonTypes.GREEN]: {
-    button: [styles.red, styles.green],
-    title: [styles.title],
-  },
 };
 
 const PrimaryButton: React.FC<Props> = (p: Props) => {
   return (
     <View
       style={[
-        styles.box,
         p.type && BUTTON_STYLES[p.type].container,
         p.containerStyle,
         p.isDisabled && { opacity: 0.5 },

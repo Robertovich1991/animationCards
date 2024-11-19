@@ -10,12 +10,11 @@ import ProfileScreen from "../../screens/TabScreens/ProfileScreen/ProfileScreen"
 import { TAB } from "../../enums/enums";
 import CardNavigationStack from "../CardStackNavigation";
 import { pixel } from "../../utils/pixel";
-import { userInfoSelector } from "../../store/selectors/profileSelector";
 import ContactNavigationStack from "../ContactsStackNavigation";
 import ModalComponent from "../../components/modal/ModalComponent";
 import { cardListSelector } from "../../store/selectors/cardSelector";
 import { getCardList } from "../../store/slices/cardSlice";
-import CardPreviewItem from "../../components/CardPreviewItem/CardPreviewItem";
+import CardPreviewItem from "../../components/CardProgressItem/CardProgressItem";
 import styles from "./BottomTabNavigation.styles";
 
 export type RootTabParamList = {
@@ -54,7 +53,7 @@ const TabNavigation: React.FC = ({ navigation }: any) => {
             <TabBarItem
               focused={focused}
               type={ItemType.LIGHT}
-              icon={<Icons.Home />}
+              icon={<Icons.TabDots />}
               title=""
             />
           ),
@@ -80,7 +79,6 @@ const TabNavigation: React.FC = ({ navigation }: any) => {
                     }}
                   />
                 }
-                title="Cards"
               />
             ),
           }}
@@ -95,12 +93,30 @@ const TabNavigation: React.FC = ({ navigation }: any) => {
                 type={ItemType.DARK}
                 icon={
                   focused ? (
-                    <Icons.ContactsBlack width={ICON_SIZE} height={ICON_SIZE} />
+                    <Icons.TabSearch width={ICON_SIZE} height={ICON_SIZE} />
                   ) : (
-                    <Icons.Contacts width={ICON_SIZE} height={ICON_SIZE} />
+                    <Icons.TabSearch width={ICON_SIZE} height={ICON_SIZE} />
                   )
                 }
-                title="Contacts"
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name={TAB.SCANNERSTACK}
+          component={ContactNavigationStack}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <TabBarItem
+                focused={focused}
+                type={ItemType.DARK}
+                icon={
+                  focused ? (
+                    <Icons.TabGift width={ICON_SIZE} height={ICON_SIZE} />
+                  ) : (
+                    <Icons.TabGift width={ICON_SIZE} height={ICON_SIZE} />
+                  )
+                }
               />
             ),
           }}
@@ -115,20 +131,19 @@ const TabNavigation: React.FC = ({ navigation }: any) => {
                 type={ItemType.DARK}
                 icon={
                   focused ? (
-                    <Icons.Settings
+                    <Icons.TabProfile
                       stroke={BLACK}
                       width={ICON_SIZE}
                       height={ICON_SIZE}
                     />
                   ) : (
-                    <Icons.Settings
+                    <Icons.TabProfile
                       stroke={GREY}
                       width={ICON_SIZE}
                       height={ICON_SIZE}
                     />
                   )
                 }
-                title="Settings"
               />
             ),
           }}
