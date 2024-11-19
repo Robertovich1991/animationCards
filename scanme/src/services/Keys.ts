@@ -1,5 +1,5 @@
 class Keys {
-  static BASE_URL = "https://scanme.am/api/";
+  static BASE_URL = "";
 }
 
 const keys = Keys;

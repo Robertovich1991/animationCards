@@ -48,21 +48,6 @@ export function MainNavigation() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name={MAIN.TAB} component={TabNavigation} />
       <Stack.Group screenOptions={{ animationEnabled: true }}>
-        <Stack.Screen
-          name={MAIN.EDIT}
-          component={EditScreen}
-          options={verticalAnimation}
-        />
-        <Stack.Screen
-          name={MAIN.CARD_PROFILE}
-          component={UserProfileScreen}
-          options={verticalAnimation}
-        />
-        {/* <Stack.Screen
-          name={MAIN.SCAN_CAMERA}
-          component={CameraScan}
-          options={verticalAnimation}
-        /> */}
       </Stack.Group>
     </Stack.Navigator>
   );

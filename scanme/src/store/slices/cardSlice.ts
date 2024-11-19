@@ -1,14 +1,11 @@
 import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
 
-
-
 export interface ICard {
   cardsList?: number[],
 }
 
 const initialState: ICard = {
   cardsList: [],
-
 }
 
 export const cardSlice = createSlice({

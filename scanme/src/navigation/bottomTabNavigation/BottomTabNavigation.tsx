@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -9,13 +8,10 @@ import Icons from "../../assets/svgs/index";
 import ProfileScreen from "../../screens/TabScreens/ProfileScreen/ProfileScreen";
 import { TAB } from "../../enums/enums";
 import CardNavigationStack from "../CardStackNavigation";
-import { pixel } from "../../utils/pixel";
-import ContactNavigationStack from "../ContactsStackNavigation";
-import ModalComponent from "../../components/modal/ModalComponent";
 import { cardListSelector } from "../../store/selectors/cardSelector";
 import { getCardList } from "../../store/slices/cardSlice";
-import CardPreviewItem from "../../components/CardProgressItem/CardProgressItem";
 import styles from "./BottomTabNavigation.styles";
+import ContactNavigationStack from "../ContactsStackNavigation";
 
 export type RootTabParamList = {
   ProfileScreen: undefined;
@@ -141,15 +137,7 @@ const TabNavigation: React.FC = ({ navigation }: any) => {
           }}
         />
       </Tab.Navigator>
-      <ModalComponent
-        onClose={() => {
-          setCardModalVisible(false);
-        }}
-        isVisible={cardModalVisible}
-        content={
-          cards && cards?.length > 0 && <CardPreviewItem data={cards[0]} />
-        }
-      />
+     
     </>
   );
 };
