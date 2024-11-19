@@ -65,8 +65,11 @@ const Card = ({
     } else if (translateY.value === 0 && index === 0) {
       rotateValue = 0;
     }
-    const rotate = withTiming(`${rotateValue}deg`, { duration: 100 });
-
+    const rotate = withSpring(`${rotateValue}deg`, {
+      damping: 10, 
+      stiffness: 80, 
+      duration: 200, 
+    });
     return {
       transform: [
         { translateY: opened.value > 0 ? 0 : position - 50 },
