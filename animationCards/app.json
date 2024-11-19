@@ -1,0 +1,60 @@
+{
+  "expo": {
+    "name": "scan-me",
+    "slug": "scan-me",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.animationCards.app"
+    },
+    "android": {
+      "enablePngCrunchInReleaseBuilds": false,
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.animationCards.app"
+    },
+    "web": {},
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow to access your camera",
+          "photosPermission": "Allow to access your photos."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends",
+          "cameraPermission": "Allow to access your camera"
+        }
+      ],
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "4c6fed96-71fa-4305-84ed-7e6b1cc4cc5d"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/4c6fed96-71fa-4305-84ed-7e6b1cc4cc5d"
+    }
+  }
+}
