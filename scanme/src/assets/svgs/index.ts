@@ -54,6 +54,8 @@ import TabDots from './tabDots.svg'
 import TabSearch from './tabSearch.svg'
 import TabGift from './tabGift.svg'
 import TabProfile from './tabProfile.svg'
+import Verify from './verify.svg'
+import Poligon from './poligon.svg'
 
 
 export default {
@@ -64,6 +66,8 @@ export default {
   TabSearch,
   TabGift,
   TabProfile,
+  Verify,
+  Poligon,
 
   Checked,
   EyeClosed,

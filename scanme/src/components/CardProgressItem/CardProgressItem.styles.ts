@@ -15,13 +15,22 @@ export const styles = StyleSheet.create({
   iconRound: {
     padding: pixel(6),
     backgroundColor: 'rgba(150,255,155,0.2)',
-    borderRadius:100
+    borderRadius: 100
   },
   title: {
     ...textGlobalStyle({ size: pixel(14), weight: 'medium' }),
     color: BLACK
   },
-  subTitle:{
+  count: {
+    ...textGlobalStyle({ size: pixel(12), weight: 'regular' }),
+    color: "rgba(156,205,150,0.8)"
+  },
+  subTitle: {
     color: GREY
+  },
+  textBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: pixel(4)
   }
 })

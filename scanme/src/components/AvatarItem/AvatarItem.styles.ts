@@ -17,5 +17,10 @@ export const styles = StyleSheet.create({
         ...textGlobalStyle({ size: pixel(14), weight: 'medium' }),
         color: BLACK
     },
+    surname: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 5
+    }
 
 });

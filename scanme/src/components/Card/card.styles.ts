@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
     },
     container: {
-        borderColor: 'green',
+        borderColor: 'rgba(0, 0, 0, 0.1)',
         borderWidth: 1,
         paddingHorizontal: pixel(16),
         paddingVertical: pixel(20),

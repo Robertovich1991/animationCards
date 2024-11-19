@@ -30,7 +30,10 @@ const AvatarItem: React.FC<Props> = (p: Props) => {
       />
       <View>
         <Text style={styles.nameText}>{p.name}</Text>
-        <Text>{p.surname}</Text>
+        <View style={styles.surname}>
+          <Text>{p.surname}</Text>
+          <Icons.Verify />
+        </View>
       </View>
     </View>
   );

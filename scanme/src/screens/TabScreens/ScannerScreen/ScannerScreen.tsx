@@ -65,24 +65,25 @@ const ScannerScreen = () => {
       </View>
       {cardList?.map((el, i) => (
         <Card
-        containerStyle={{
-          // transform: [
-          //   { rotate: i === 0 ? "0deg" : i % 2 === 0 ? "3deg" : "-3deg" }
-          // ]
-        }}
-        id={el.id}
-        onRemove={removeFromList}
-        len={cardList.length}
-        profession={el.profession}
-        name={el.name}
-        date={el.date}
-        url={el.url}
-        translateY={translateY}
-        index={i}
-        onOpened={(isOpen: boolean) => {
-          opened.current = isOpen ? i : -1;
-        }}
-      />
+          containerStyle={
+            {
+              // transform: [
+              //   { rotate: i === 0 ? "0deg" : i % 2 === 0 ? "3deg" : "-3deg" }
+              // ]
+            }
+          }
+          id={el.id}
+          onRemove={removeFromList}
+          len={cardList.length}
+          name={el.name}
+          surname={el.surname}
+          url={el.url}
+          translateY={translateY}
+          index={i}
+          onOpened={(isOpen: boolean) => {
+            opened.current = isOpen ? i : -1;
+          }}
+        />
       ))}
     </SafeAreaView>
   );

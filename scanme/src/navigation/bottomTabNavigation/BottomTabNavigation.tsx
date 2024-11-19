@@ -68,15 +68,7 @@ const TabNavigation: React.FC = ({ navigation }: any) => {
                 focused={focused}
                 type={ItemType.DARK}
                 icon={
-                  <Image
-                    style={{
-                      width: ICON_SIZE,
-                      height: ICON_SIZE,
-                      borderRadius: pixel(20),
-                    }}
-                    source={{
-                      uri: "https://i.pinimg.com/564x/2f/15/f2/2f15f2e8c688b3120d3d26467b06330c.jpg",
-                    }}
+                  <Icons.TabDots
                   />
                 }
               />

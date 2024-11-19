@@ -28,12 +28,13 @@ const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
 const style = {};
 const bgColor = "white";
-const MARGIN = 100
+const MARGIN = 80;
 const Card = ({
   translateY,
   index,
   onOpened,
   name,
+  surname,
   url,
   len,
   onRemove,
@@ -49,20 +50,19 @@ const Card = ({
     let i = translateY.value + index;
     i = i < -1 ? len + i : i;
     i = i % len;
-    const position = i * -MARGIN +(i**2.4)*3;
+    const position = i * -MARGIN + i * 2.4 * 3;
     let opacity = 1;
     if (position > 0) {
-      opacity = 1 - Math.abs(position / MARGIN);
+      opacity = 1 - Math.abs(position / MARGIN+10);
     } else if (position < -360) {
       opacity = 1 - Math.abs((position + 360) / MARGIN);
     }
     let rotateValue = 0;
-
     if (Math.floor(i) % 2 === 1) {
       rotateValue = 3;
     } else if (i < 0) {
       rotateValue = -3;
-    } else if (translateY.value ===0 && index === 0) {
+    } else if (translateY.value === 0 && index === 0) {
       rotateValue = 0;
     }
     const rotate = withTiming(`${rotateValue}deg`, { duration: 100 });
@@ -72,14 +72,14 @@ const Card = ({
         { translateY: opened.value > 0 ? 0 : position - 50 },
         { translateX: translateX.value },
         { scale: opacity === 0 ? 0 : 1 - 0.5 * (-position / 500) },
-        // {
-        //   rotate: rotate,
-        // },
+        {
+          rotate: rotate,
+        },
       ],
       zIndex: len - i,
       opacity,
     };
-  },[]);
+  }, []);
 
   const gestureHandler = useAnimatedGestureHandler({
     onActive: (event) => {
@@ -174,7 +174,7 @@ const Card = ({
                       width: "100%",
                     }}
                   >
-                    <AvatarItem name={name} surname={name} uri={url} />
+                    <AvatarItem surname={surname} name={name} uri={url} />
                     <Text style={styles.currency}>
                       $<Text style={styles.price}>121</Text>.00
                     </Text>
