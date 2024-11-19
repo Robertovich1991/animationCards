@@ -1,0 +1,59 @@
+{
+  "Login_Form": {
+    "Title": "Welcome back!",
+    "Login_label": "Email",
+    "Login_Error": "Incorrect Email Address",
+    "Login_placeholder": "Email ",
+    "Password_label": "Password",
+    "Password_Error": "Min. 8 characters",
+    "Password_placeholder": "Password",
+    "Forget": "Forget Password?",
+    "Button_text": "Log in",
+    "Welcome": "Welcome Back",
+    "Forgot_password": "Forgot password?"
+  },
+  "Errors": {
+    "Required": "Required",
+    "Invalid_Email": "Invalid email format",
+    "First_name": "Invalid First Name",
+    "Second_name": "Invalid Second Name",
+    "Password_pattern": "Password must contain at least one lowercase letter, one uppercase letter, one digit, one symbol, and be 8-20 characters long",
+    "Password_match": "Passwords do not match",
+    "Error_message_title": "Opps,something went wrong..",
+    "Register_failed": "Registration failed",
+    "Login_failed": "Wrong email or password",
+    "PasswordMatch": "Passwords must match"
+  },
+  "Register": {
+    "Sign_Up": "Don't have an account?\nSign up here",
+    "Register_Start": "Let's get started!",
+    "Create_account": "Create account",
+    "Title": "Sign in",
+    "First_name": "First name",
+    "Firstname_placeholder": "First name",
+    "Second_name": "Second name",
+    "Second_name_placeholder": "Second name",
+    "Confirm_Password_placeholder": "Confirm password",
+    "Confirm_Password_label": "Confirm password",
+    "Confirm_email": "Мы отправили вам электронное письмо,\n проверьте свой почтовый ящик, чтобы подтвердить\n свою учетную запись и войти в систему"
+  },
+  "MyProfile": {
+    "My_Profile": "My profile",
+    "Name": "Name",
+    "Surname": "Surname"
+  },
+  "Card": {
+    "Job": "Job title",
+    "Company": "Company",
+    "Location": "Location",
+    "Bio": "Bio",
+    "Tags": "Tags",
+    "Content": "Contenc",
+    "Add_content": "Add new content",
+    "Add_card": "Add new card"
+  },
+  "Admin": {
+    "Save": "Save",
+    "Cancel": "Cancel"
+  }
+}
