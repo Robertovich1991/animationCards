@@ -4,10 +4,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { store } from "./src/store/config/configStore";
 import "./src/local/i18next/i18n";
 import { WHITE } from "./src/assets/colors/colors";
-import Main from "./Main";
+import Main from "./Main"
+
 
 export default function App() {
-
   return (
     <View style={styles.container}>
       <Provider store={store}>

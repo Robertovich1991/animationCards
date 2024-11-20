@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from "react";
-import { PanResponder, SafeAreaView, StyleSheet, View } from "react-native";
+import { PanResponder, SafeAreaView, View } from "react-native";
 import { useSharedValue, withSpring } from "react-native-reanimated";
 import Card from "../../../components/Card/card";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,12 +18,18 @@ const ScannerScreen = () => {
   const dispatch = useDispatch();
   const panResponder = useRef(
     PanResponder.create({
-      // Ask to be the responder:
+      onStartShouldSetPanResponder: () => false,
       onMoveShouldSetPanResponder: (_, gestureState) => {
-        //console.log(gestureState.dx,gestureState.dy);
+        if (!gestureState || typeof gestureState.dy !== 'number' || typeof gestureState.dx !== 'number') {
+          return false; // Avoid crashes on invalid gesture state
+        }
+      
+        const dy = gestureState.dy;
+        const dx = gestureState.dx;
+      
         return (
           opened.current === -1 &&
-          Math.abs(gestureState.dy) > Math.abs(gestureState.dx)
+          Math.abs(dy) > Math.abs(dx)
         );
       },
       onPanResponderMove: (evt, gestureState) => {
@@ -65,13 +71,7 @@ const ScannerScreen = () => {
       </View>
       {cardList?.map((el, i) => (
         <Card
-          containerStyle={
-            {
-              // transform: [
-              //   { rotate: i === 0 ? "0deg" : i % 2 === 0 ? "3deg" : "-3deg" }
-              // ]
-            }
-          }
+          key={i}
           id={el.id}
           onRemove={removeFromList}
           len={cardList.length}

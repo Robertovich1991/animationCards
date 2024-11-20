@@ -1,4 +1,4 @@
-import { Text, View, Dimensions, TouchableWithoutFeedback } from "react-native";
+import { Text, View, Dimensions, TouchableWithoutFeedback, useWindowDimensions } from "react-native";
 import Animated, {
   useAnimatedStyle,
   withTiming,
@@ -42,7 +42,10 @@ const Card = ({
   id,
 }) => {
   const translateX = useSharedValue(0);
-  const SCREEN_WIDTH = Dimensions.get("window").width;
+ // const SCREEN_WIDTH = Dimensions.get("window").width;
+ const  SCREEN_WIDTH  = useWindowDimensions();
+console.log(SCREEN_WIDTH,'iiiiiiiiiiiiiiiiiiiii');
+
   const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.2;
   const opened = useSharedValue(0);
   const cardlist = useSelector(cardListSelector);
