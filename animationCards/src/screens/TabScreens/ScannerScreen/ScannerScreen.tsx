@@ -20,16 +20,9 @@ const ScannerScreen = () => {
     PanResponder.create({
       onStartShouldSetPanResponder: () => false,
       onMoveShouldSetPanResponder: (_, gestureState) => {
-        if (!gestureState || typeof gestureState.dy !== 'number' || typeof gestureState.dx !== 'number') {
-          return false; // Avoid crashes on invalid gesture state
-        }
-      
-        const dy = gestureState.dy;
-        const dx = gestureState.dx;
-      
         return (
           opened.current === -1 &&
-          Math.abs(dy) > Math.abs(dx)
+          Math.abs(gestureState.dy) > Math.abs(gestureState.dx)
         );
       },
       onPanResponderMove: (evt, gestureState) => {
