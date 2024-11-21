@@ -43,20 +43,22 @@ const Card = ({
 }) => {
   const translateX = useSharedValue(0);
   const SCREEN_WIDTH = Dimensions.get("window").width;
-  const SWIPE_THRESHOLD = 300
+  const SWIPE_THRESHOLD = 50
   const opened = useSharedValue(0);
   const cardlist = useSelector(cardListSelector);
   const animatedStyles = useAnimatedStyle(() => {
     let i = translateY.value + index;
-    i = i < -1 ? len + i : i;
+    //i = i < -1 ? len + i : i;
     i = i % len;
-    const position = i * -MARGIN + i * 2.4 * 3;
+    i = i< -1 ?len + i :i;
+    const position = i * -MARGIN + i * 2.4 ** 3;
     let opacity = 1;
     if (position > 0) {
-      opacity = 1 - Math.abs(position / MARGIN + 10);
+      opacity = 1 - Math.abs(position / MARGIN+5);
     } else if (position < -360) {
-      opacity = 1 - Math.abs((position + 360) / MARGIN);
+      opacity = 1 - Math.abs((position + 360) / MARGIN+5);
     }
+
     return {
       transform: [
         { translateX: translateX.value },
@@ -67,12 +69,10 @@ const Card = ({
       zIndex: Math.floor(len - i),
       opacity,
     };
-  }, []);
+  }, [cardlist]);
 
   const gestureHandler = useAnimatedGestureHandler({
     onActive: (event) => {
-      console.log(translateY.value, 'index', index);
-
       const x = (-translateY.value - index) % cardlist.length;
       if (
         translateY.value + index === 0 || translateY.value + index === 10 ||
@@ -87,13 +87,14 @@ const Card = ({
           withTiming(SCREEN_WIDTH * Math.sign(translateX.value), {}, () => {
             runOnJS(onRemove)(id, index);
           }),
-          withDelay(500, withTiming(0, { duration: 0 }))
+          withSpring(0)
         );
       } else {
-        translateX.value = withSpring(0);
+        translateX.value = withDelay(300, withTiming(0));
       }
     },
   });
+console.log('==[[[[');
 
   const sizeStyle = useAnimatedStyle(() => {
     return {
@@ -150,7 +151,7 @@ const Card = ({
                   >
                     <AvatarItem surname={surname} name={name} uri={url} />
                     <Text style={styles.currency}>
-                      $<Text style={styles.price}>121</Text>.00
+                      $<Text style={styles.price}>{Math.floor(100+Math.random()*100)}</Text>.00 
                     </Text>
                   </View>
                   <Icons.Chart style={{ right: pixel(16) }} />

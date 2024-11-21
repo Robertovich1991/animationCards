@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from "react";
 import { PanResponder, SafeAreaView, StyleSheet, View } from "react-native";
-import { useSharedValue, withSpring } from "react-native-reanimated";
+import { useSharedValue, withSpring, withTiming } from "react-native-reanimated";
 import Card from "../../../components/Card/card";
 import { useDispatch, useSelector } from "react-redux";
 import { cardListSelector } from "../../../store/selectors/cardSelector";
@@ -49,9 +49,7 @@ const ScannerScreen = () => {
         );
 
         index = count * (cardList.length - 1) - index;
-        console.log("New Index", index, translateY.value);
-
-        translateY.value = withSpring(translateY.value - 1, { duration: 500 });
+        translateY.value = withTiming(translateY.value - 1, { duration: 500 });
         dispatch(removeItem(id));
       }
     },
