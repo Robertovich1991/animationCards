@@ -1,4 +1,4 @@
-import { Text, View, Dimensions, TouchableWithoutFeedback, useWindowDimensions } from "react-native";
+import { Text, View, Dimensions, TouchableWithoutFeedback, Platform } from "react-native";
 import Animated, {
   useAnimatedStyle,
   withTiming,
@@ -28,7 +28,7 @@ const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
 const style = {};
 const bgColor = "white";
-const MARGIN = 80;
+const MARGIN = pixel(80);
 const Card = ({
   translateY,
   index,
@@ -42,11 +42,8 @@ const Card = ({
   id,
 }) => {
   const translateX = useSharedValue(0);
- // const SCREEN_WIDTH = Dimensions.get("window").width;
- const  SCREEN_WIDTH  = useWindowDimensions();
-console.log(SCREEN_WIDTH,'iiiiiiiiiiiiiiiiiiiii');
-
-  const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.2;
+  const SCREEN_WIDTH = Dimensions.get("window").width;
+  const SWIPE_THRESHOLD = 300
   const opened = useSharedValue(0);
   const cardlist = useSelector(cardListSelector);
   const animatedStyles = useAnimatedStyle(() => {
@@ -56,43 +53,30 @@ console.log(SCREEN_WIDTH,'iiiiiiiiiiiiiiiiiiiii');
     const position = i * -MARGIN + i * 2.4 * 3;
     let opacity = 1;
     if (position > 0) {
-      opacity = 1 - Math.abs(position / MARGIN+10);
+      opacity = 1 - Math.abs(position / MARGIN + 10);
     } else if (position < -360) {
       opacity = 1 - Math.abs((position + 360) / MARGIN);
     }
-    let rotateValue = 0;
-    if (Math.floor(i) % 2 === 1) {
-      rotateValue = 3;
-    } else if (i < 0) {
-      rotateValue = -3;
-    } else if (translateY.value === 0 && index === 0) {
-      rotateValue = 0;
-    }
-    const rotate = withSpring(`${rotateValue}deg`, {
-      damping: 10, 
-      stiffness: 80, 
-      duration: 200, 
-    });
     return {
       transform: [
-        { translateY: opened.value > 0 ? 0 : position - 50 },
         { translateX: translateX.value },
+        { translateY: opened.value > 0 ? 0 : position - 50 },
         { scale: opacity === 0 ? 0 : 1 - 0.5 * (-position / 500) },
-        {
-          rotate: rotate,
-        },
+        { rotate: Math.sin(position / 15) + "deg" }
       ],
-      zIndex: len - i,
+      zIndex: Math.floor(len - i),
       opacity,
     };
   }, []);
 
   const gestureHandler = useAnimatedGestureHandler({
     onActive: (event) => {
+      console.log(translateY.value, 'index', index);
+
       const x = (-translateY.value - index) % cardlist.length;
       if (
-        translateY.value + index === 0 ||
-        (-translateY.value - index) % cardlist.length === 0
+        translateY.value + index === 0 || translateY.value + index === 10 ||
+        (-translateY.value - index) % cardlist.length === 0 || (translateY.value - index) % cardlist.length === 0 || translateY.value > index
       ) {
         translateX.value = event.translationX;
       }
@@ -100,30 +84,16 @@ console.log(SCREEN_WIDTH,'iiiiiiiiiiiiiiiiiiiii');
     onEnd: () => {
       if (Math.abs(translateX.value) > SWIPE_THRESHOLD) {
         translateX.value = withSequence(
-          withTiming(SCREEN_WIDTH * Math.sign(translateX.value), {}),
-          withSpring(0)
+          withTiming(SCREEN_WIDTH * Math.sign(translateX.value), {}, () => {
+            runOnJS(onRemove)(id, index);
+          }),
+          withDelay(500, withTiming(0, { duration: 0 }))
         );
       } else {
         translateX.value = withSpring(0);
       }
     },
   });
-
-  const handleEndGesture = () => {
-    if (Math.abs(translateX.value) > SWIPE_THRESHOLD) {
-      const swipeDirection =
-        translateX.value > 0 ? "Card liked successfully" : "Card disliked";
-      translateX.value = withSequence(
-        withTiming(SCREEN_WIDTH * Math.sign(translateX.value), {}, () => {
-          runOnJS(onRemove)(id, index);
-        }),
-        withDelay(500, withTiming(0, { duration: 0 }))
-      );
-      //onRemove(id)
-    } else {
-      translateX.value = withSpring(0);
-    }
-  };
 
   const sizeStyle = useAnimatedStyle(() => {
     return {
@@ -136,20 +106,18 @@ console.log(SCREEN_WIDTH,'iiiiiiiiiiiiiiiiiiiii');
       ),
     };
   });
-  return true ? (
+  return true && (
     <Animated.View
       style={[
         styles.wrapper,
         opened.value === 0 ? animatedStyles : {},
-        { zIndex: 10 - index },
       ]}
     >
-      <GestureHandlerRootView style={[styles.wrapper, { zIndex: 10 - index }]}>
+      <GestureHandlerRootView style={[styles.wrapper2x, { zIndex: 10 - index }]}>
         <PanGestureHandler
           onGestureEvent={gestureHandler}
-          onEnded={handleEndGesture}
         >
-          <Animated.View style={[styles.wrapper, sizeStyle]}>
+          <Animated.View style={[styles.wrapper2x, sizeStyle]}>
             <TouchableWithoutFeedback
               style={styles.card}
               onPress={() => {
@@ -206,8 +174,7 @@ console.log(SCREEN_WIDTH,'iiiiiiiiiiiiiiiiiiiii');
         </PanGestureHandler>
       </GestureHandlerRootView>
     </Animated.View>
-  ) : (
-    <Text>{index}</Text>
+
   );
 };
 

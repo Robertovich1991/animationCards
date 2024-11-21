@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from "react";
-import { PanResponder, SafeAreaView, View } from "react-native";
+import { PanResponder, SafeAreaView, StyleSheet, View } from "react-native";
 import { useSharedValue, withSpring } from "react-native-reanimated";
 import Card from "../../../components/Card/card";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,8 +18,9 @@ const ScannerScreen = () => {
   const dispatch = useDispatch();
   const panResponder = useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: () => false,
+      // Ask to be the responder:
       onMoveShouldSetPanResponder: (_, gestureState) => {
+        //console.log(gestureState.dx,gestureState.dy);
         return (
           opened.current === -1 &&
           Math.abs(gestureState.dy) > Math.abs(gestureState.dx)

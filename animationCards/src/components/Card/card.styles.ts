@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { pixel } from "../../utils/pixel";
 import { BLACK, GREY } from "../../assets/colors/colors";
 import { textGlobalStyle } from "../../utils/text-globalStyles";
@@ -9,6 +9,10 @@ export const styles = StyleSheet.create({
     wrapper: {
         position: "absolute",
         bottom: 0,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    wrapper2x: {
         justifyContent: "center",
         alignItems: "center",
     },
